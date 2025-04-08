@@ -10,13 +10,13 @@ This code example demonstrates the implementation of inductive sensing based tou
 
 ## Requirements
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.4 or later
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.5 or later
 
-   > **Note:** This code example version requires ModusToolbox&trade; v3.4 and is not backward compatible with v3.4 or older versions.
+   > **Note:** This code example version requires ModusToolbox&trade; v3.5 and is not backward compatible with older versions.
 
-- Board support package (BSP) minimum required version: 3.2.0
+- Board support package (BSP) minimum required version: 3.3.0
 - Programming language: C
-- Associated parts: [PSOC&trade; 4000T](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-4-32-bit-arm-cortex-m0-mcu/psoc-4000-entry-level/psoc-4000t)
+- Associated parts: [PSOC&trade; 4000T](https://www.infineon.com/002-33949), [PSOC&trade; 4100T Plus](https://www.infineon.com/002-39671)
 
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
@@ -29,19 +29,24 @@ This code example demonstrates the implementation of inductive sensing based tou
 ## Supported kits (make variable 'TARGET')
 
 - [PSOC&trade; 4000T CAPSENSE&trade; Multi-Sense Prototyping Kit](https://www.infineon.com/CY8CPROTO-040T-MS) (`CY8CPROTO-040T-MS`) - Default `TARGET`
-
+- [PSOC&trade; 4100T Plus CAPSENSE&trade; Prototyping Kit](https://www.infineon.com/CY8CPROTO-041TP) (`CY8CPROTO-041TP`)
 
 ## Hardware setup
 
-This example uses the board's default configuration. See the [kit user guide](https://www.infineon.com/dgdl/Infineon-CY8CPROTO-040T-MS_UG-UserManual-v02_00-EN.pdf?fileId=8ac78c8c93dda25b019466a75dd07a01) to ensure that the board is configured correctly to use VDD at 3.3 V.
+This example uses the board's default configuration. See the [kit user guide](https://www.infineon.com/002-40406) to ensure that the board is configured correctly to use VDD at 3.3 V.
 
+**Table 1. Kit User guide and supported voltages**
+
+   Kit | User guide  | 1.8V | 3.3V | 5V
+   :-------- |:----------- |:----------- |:----- |:-----
+   CY8CPROTO-040T-MS| [CY8CPROTO-040T-MS PSOC&trade; 4000T CAPSENSE&trade; Multi-Sense Prototyping Kit guide](https://www.infineon.com/002-40406)  | Yes | Yes* | Yes
+   CY8CPROTO-041TP| [CY8CPROTO-041TP PSOC&trade; 4100T Plus CAPSENSE&trade; Prototyping Kit guide](https://www.infineon.com/002-40273) | Yes | Yes | Yes*
+
+   Yes* - Kit default operating voltage
 
 ## Software setup
 
 See the [ModusToolbox&trade; tools package installation guide](https://www.infineon.com/ModusToolboxInstallguide) for information about installing and configuring the tools package.
-
-This example requires [ModusToolbox&trade; CAPSENSE&trade; and Multi-Sense Pack](https://softwaretools.infineon.com/tools/com.ifx.tb.tool.modustoolboxpackmultisense) to be installed.
-
 
 ## Using the code example
 
@@ -155,7 +160,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 ## Operation
 
-1. Connect the USB cable between the [CY8CPROTO-040T-MS kit](https://www.infineon.com/CY8CPROTO-040T-MS) and the PC with the keypad-4 extension board, as shown in **Figure 1**.
+1. Connect the USB cable between the kit and the PC with the keypad-4 extension board, as shown in **Figure 1**.
 
    **Figure 1. Connecting the CY8CPROTO-040T-MS kit with the USB cable**
 
@@ -192,6 +197,12 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 3. After programming, the application starts automatically.
 
+> **Note:** After programming, you may see the following error message if the Debug mode is disabled. This can be ignored, or enabling debug will solve this error.<br>
+
+   ``` c
+   "Error: Error connecting Dp: Cannot read IDR"
+   ```
+
 4. Press any of the sensors with your finger; LEDs turn ON, indicating the activation of different ISX sensors as shown in **Figure 2**.
 
    **Figure 2. Press the CY8CPROTO-040T-MS kit with the PC**
@@ -211,7 +222,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
    All LEDs will be OFF when none of the sensor buttons are pressed.
    
-   > **Note:** When pressing ISX button 3, the LED D3 on the expansion board and LED3 on the control board will both turn ON because they share the same GPIO pin (P3.0).
+   > **Note:** When pressing ISX button 3, the LED D3 on the expansion board and LED3 on the CY8CPROTO-040T-MS control board (or LED6 on the CY8CPROTO-041TP control board) will both turn ON because they share the same GPIO pin.
 
 
 ### Monitor data using CAPSENSE&trade; Tuner
@@ -343,11 +354,7 @@ To view the sensor data for the different ISX buttons, select Button0_Rx0_Lx0 un
 
 ## Operation at other voltages
 
-[CY8CPROTO-040T-MS kit](https://www.infineon.com/CY8CPROTO-040T-MS) supports operating voltages of 1.8 V, 3.3 V, and 5 V. See the [kit user guide](https://www.infineon.com/dgdl/Infineon-CY8CPROTO-040T-MS_UG-UserManual-v02_00-EN.pdf?fileId=8ac78c8c93dda25b019466a75dd07a01) to set the preferred operating voltage and see section [Setup the VDDA supply voltage and debug mode in Device Configurator](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator).
-
-The functionalities of this application is optimally tuned for 3.3 V. Observe that the basic functionalities work across other voltages.
-
-For better performance, it is recommended to tune the application to use the preferred voltages. 
+Both [CY8CPROTO-040T-MS kit](https://www.infineon.com/002-40406) and [CY8CPROTO-041TP kit](https://www.infineon.com/002-40273) supports operating voltages of 1.8 V, 3.3 V, and 5 V. See the respective kit user guide to set the preferred operating voltage and see section [Setup the VDDA supply voltage and debug mode in Device Configurator](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator).
 
 
 ## Tuning procedure
@@ -721,25 +728,22 @@ Update the following macros in *main.c* using the scan time calculated. The valu
 
 > **Note:** If the application has more than one widget, add the scan times of individual widgets calculated.
 
+# Debugging
 
-## Debugging
+You can debug this project to step through the code. In the IDE, use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For details, see the "Program and debug" section in the [Eclipse IDE for ModusToolbox&trade; user guide](https://www.infineon.com/MTBEclipseIDEUserGuide).
 
-You can debug the example to step through the code.
+To enable the debug option, see the [Setup VDDA and Debug mode](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator) section. To achieve low power consumption, it is recommended to disable it.
 
+See **Table 7** for the default debug configuration in the supported kits.
 
-<details><summary><b>In Eclipse IDE</b></summary>
+**Table 7. Debug mode option status**
 
-Use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For details, see the "Program and debug" section in the [Eclipse IDE for ModusToolbox&trade; user guide](https://www.infineon.com/MTBEclipseIDEUserGuide).
+Kit  | Debug mode 
+:----| :----------
+CY8CPROTO-040T-MS | Enabled
+CY8CPROTO-041TP | Enabled
 
-</details>
-
-
-<details><summary><b>In other IDEs</b></summary>
-
-Follow the instructions in your preferred IDE.
-
-</details>
-
+> **Note** : It is recommended to disable debug option, to achieve low power consumption.
 
 ## Design and implementation
 
@@ -794,7 +798,7 @@ The CAPSENSE&trade; data structure that contains the CAPSENSE&trade; raw data is
    <img src="images/vdda-setting.png" width=""/>
 <br>
 
-3. By default, the Debug mode is disabled for this application to reduce power consumption. Enable the Debug mode to enable SWD pins as shown in **Figure 31**.
+3. By default, the Debug mode is enabled for this application to reduce power consumption. Enable the Debug mode to enable SWD pins as shown in **Figure 31**.
 
    **Figure 31. Enable the Debug mode in the System tab of Device Configurator**
 
@@ -830,7 +834,7 @@ The CAPSENSE&trade; data structure that contains the CAPSENSE&trade; raw data is
 
 Resources  | Links
 -----------|----------------------------------
-Application notes  | [AN79953](https://www.infineon.com/AN79953) – Getting started with PSOC&trade; 4 MCU <br>  [AN234231](https://www.infineon.com/AN234231) – Achieving lowest-power capacitive sensing with PSOC&trade; 4000T <br> [AN85951](https://www.infineon.com/AN85951) – PSOC&trade; 4 and PSOC&trade; 6 MCU CAPSENSE&trade; design guide <br>  [AN239751](https://www.infineon.com/AN239751) – Flyback inductive sensing (ISX) design guide
+Application notes  | [AN79953](https://www.infineon.com/AN79953) – Getting started with PSOC&trade; 4 MCU <br>  [AN234231](https://www.infineon.com/AN234231) – PSOC&trade; 4 CAPSENSE&trade; ultra-low-power capacitive sensing techniques <br> [AN85951](https://www.infineon.com/AN85951) – PSOC&trade; 4 and PSOC&trade; 6 MCU CAPSENSE&trade; design guide <br>  [AN239751](https://www.infineon.com/AN239751) – Flyback inductive sensing (ISX) design guide
 Code examples  | [Using ModusToolbox&trade;](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
 Device documentation |  [PSOC&trade; 4 datasheets](https://www.infineon.com/cms/en/search.html?intc=searchkwr-return#!view=downloads&term=PSOC%204&doc_group=Data%20Sheet) <br>[PSOC&trade; 4 technical reference manuals](https://www.infineon.com/cms/en/search.html#!term=PSOC%204%20technical%20reference%20manual&view=all)
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board)
@@ -856,6 +860,7 @@ Document title: *CE240146* – *PSOC&trade; 4: MSCLP inductive sensing touch-ove
  1.0.0   | New code example
  2.0.0   | Major update to support ModusToolbox&trade; v3.3. This version is not backward compatible with previous versions of ModusToolbox&trade;
  2.1.0   | Major update to support ModusToolbox&trade; v3.4. This version is not backward compatible with previous versions of ModusToolbox&trade;. Added SmartSense support.
+ 3.0.0   | Major update to support ModusToolbox&trade; v3.5. This version is not backward compatible with previous versions of ModusToolbox&trade;. Added CY8CPROTO-041TP kit support
 <br>
 
 
@@ -872,4 +877,4 @@ PSOC&trade;, formerly known as PSoC&trade;, is a trademark of Infineon Technolog
 <br>
 TO THE EXTENT PERMITTED BY APPLICABLE LAW, CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARD TO THIS DOCUMENT OR ANY SOFTWARE OR ACCOMPANYING HARDWARE, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  No computing device can be absolutely secure.  Therefore, despite security measures implemented in Cypress hardware or software products, Cypress shall have no liability arising out of any security breach, such as unauthorized access to or use of a Cypress product. CYPRESS DOES NOT REPRESENT, WARRANT, OR GUARANTEE THAT CYPRESS PRODUCTS, OR SYSTEMS CREATED USING CYPRESS PRODUCTS, WILL BE FREE FROM CORRUPTION, ATTACK, VIRUSES, INTERFERENCE, HACKING, DATA LOSS OR THEFT, OR OTHER SECURITY INTRUSION (collectively, "Security Breach").  Cypress disclaims any liability relating to any Security Breach, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any Security Breach.  In addition, the products described in these materials may contain design defects or errors known as errata which may cause the product to deviate from published specifications. To the extent permitted by applicable law, Cypress reserves the right to make changes to this document without further notice. Cypress does not assume any liability arising out of the application or use of any product or circuit described in this document. Any information provided in this document, including any sample design information or programming code, is provided only for reference purposes.  It is the responsibility of the user of this document to properly design, program, and test the functionality and safety of any application made of this information and any resulting product.  "High-Risk Device" means any device or system whose failure could cause personal injury, death, or property damage.  Examples of High-Risk Devices are weapons, nuclear installations, surgical implants, and other medical devices.  "Critical Component" means any component of a High-Risk Device whose failure to perform can be reasonably expected to cause, directly or indirectly, the failure of the High-Risk Device, or to affect its safety or effectiveness.  Cypress is not liable, in whole or in part, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any use of a Cypress product as a Critical Component in a High-Risk Device. You shall indemnify and hold Cypress, including its affiliates, and its directors, officers, employees, agents, distributors, and assigns harmless from and against all claims, costs, damages, and expenses, arising out of any claim, including claims for product liability, personal injury or death, or property damage arising from any use of a Cypress product as a Critical Component in a High-Risk Device. Cypress products are not intended or authorized for use as a Critical Component in any High-Risk Device except to the limited extent that (i) Cypress's published data sheet for the product explicitly states Cypress has qualified the product for use in a specific High-Risk Device, or (ii) Cypress has given you advance written authorization to use the product as a Critical Component in the specific High-Risk Device and you have signed a separate indemnification agreement.
 <br>
-Cypress, the Cypress logo, and combinations thereof, ModusToolbox, PSoC, CAPSENSE, EZ-USB, F-RAM, and TRAVEO are trademarks or registered trademarks of Cypress or a subsidiary of Cypress in the United States or in other countries. For a more complete list of Cypress trademarks, visit www.infineon.com. Other names and brands may be claimed as property of their respective owners.
+Cypress, the Cypress logo, and combinations thereof, ModusToolbox, PSOC, CAPSENSE, EZ-USB, F-RAM, and TRAVEO are trademarks or registered trademarks of Cypress or a subsidiary of Cypress in the United States or in other countries. For a more complete list of Cypress trademarks, visit www.infineon.com. Other names and brands may be claimed as property of their respective owners.
